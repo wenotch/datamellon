@@ -79,9 +79,6 @@ function List({ orders }) {
             </Flex>
           ) : (
             currentPosts.map((order) => {
-              {
-                /* console.log(order); */
-              }
               return (
                 <Tr key={order["Order ID"]}>
                   <Td>{order["Order ID"]}</Td>

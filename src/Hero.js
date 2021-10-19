@@ -48,15 +48,15 @@ export default function Hero({ orders }) {
 
   //deletes duplicate courtries
   var realCountries = [];
-  var realCountries = countries.filter(function (elem, pos) {
-    return countries.indexOf(elem) == pos;
+  realCountries = countries.filter(function (elem, pos) {
+    return countries.indexOf(elem) === pos;
   });
   console.log(realCountries);
 
   //deletes duplicate products
   var realProducts = [];
-  var realProducts = products.filter(function (elem, pos) {
-    return products.indexOf(elem) == pos;
+  realProducts = products.filter(function (elem, pos) {
+    return products.indexOf(elem) === pos;
   });
   console.log(realCountries, realProducts);
   return (
