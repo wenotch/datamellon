@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React from "react";
 
 function Pagination({ postsPerpage, totalPosts, paginate }) {
   const pageNumbers = [];

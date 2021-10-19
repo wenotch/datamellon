@@ -10,11 +10,11 @@ import {
   Td,
   TableCaption,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Pagination from "./Pagination";
 
 function List({ orders }) {
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [value, setValue] = useState("");
   const [currentPage, setcurrentPage] = useState(1);
   const [postsPerPage] = useState(100);

@@ -3,7 +3,6 @@ import {
   chakra,
   Box,
   useColorModeValue,
-  Flex,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -37,19 +36,29 @@ function StatsCard(props) {
 
 export default function Hero({ orders }) {
   const [countries, setCountries] = useState([]);
-  const [state, setstate] = useState(initialState)
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     orders.map((eachOrder) =>
       setCountries((orders) => [...orders, eachOrder.Country])
     );
-  });
-  const totalOrders = orders.length;
+    orders.map((eachOrder) =>
+      setProducts((orders) => [...orders, eachOrder["Product Name"]])
+    );
+  }, [orders]);
 
+  //deletes duplicate courtries
   var realCountries = [];
   var realCountries = countries.filter(function (elem, pos) {
     return countries.indexOf(elem) == pos;
   });
   console.log(realCountries);
+
+  //deletes duplicate products
+  var realProducts = [];
+  var realProducts = products.filter(function (elem, pos) {
+    return products.indexOf(elem) == pos;
+  });
+  console.log(realCountries, realProducts);
   return (
     <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 24 }}>
       <chakra.h1
@@ -63,11 +72,15 @@ export default function Hero({ orders }) {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title={"Total Orders"}
-          stat={totalOrders}
+          stat={orders.length}
           bg="teal"
           color="white"
         />
-        <StatsCard title={"Last Order Date"} stat={"Order Date"} bg="white" />
+        <StatsCard
+          title={"Total Products"}
+          stat={realProducts.length}
+          bg="white"
+        />
         <StatsCard
           title={"Countries"}
           stat={realCountries.length}
