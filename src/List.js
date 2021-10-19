@@ -39,21 +39,26 @@ function List({ orders }) {
   const mobiletoggler = { base: "none", md: "table-cell" };
   return (
     <Box p="50px" px={36}>
-      <Stack direction="row" spacing={4} align="center" mb={4} justify="center">
-        <InputGroup w="60" m="auto">
-          <InputLeftElement pointerEvents="none" />
-          <Input
-            value={value}
-            onChange={handleChange}
-            size="md"
-            placeholder="Search Order"
-          />
-        </InputGroup>
-      </Stack>
+      <Stack
+        direction="row"
+        spacing={4}
+        align="center"
+        mb={4}
+        justify="center"
+      ></Stack>
       <Divider />
       <Table variant="simple">
         <TableCaption placement="top">
           All Orders ({orders.length})
+          <InputGroup w="60" m="auto" mt="10px">
+            <InputLeftElement pointerEvents="none" />
+            <Input
+              value={value}
+              onChange={handleChange}
+              size="md"
+              placeholder="Search Order"
+            />
+          </InputGroup>
         </TableCaption>
         <Thead>
           <Tr>
@@ -74,7 +79,9 @@ function List({ orders }) {
             </Flex>
           ) : (
             currentPosts.map((order) => {
-              {/* console.log(order); */}
+              {
+                /* console.log(order); */
+              }
               return (
                 <Tr key={order["Order ID"]}>
                   <Td>{order["Order ID"]}</Td>

@@ -46,28 +46,28 @@ export default function Hero({ orders }) {
         textAlign={"center"}
         fontSize={"2xl"}
         py={10}
-        fontWeight={"bold"}
+        fontWeight={"medium"}
       >
         Welcome
       </chakra.h1>
-      <SimpleGrid columns={{ base: 1, md: 3 }}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title={"Total Orders"}
           stat={totalOrders}
           bg="teal"
           color="white"
         />
-        {/* <StatsCard
+        <StatsCard
           title={"Last Order Date"}
           stat={lastOrder["Order Date"]}
           bg="white"
         />
         <StatsCard
           title={"Total Customers"}
-          stat={"100 "}
+          stat={totalOrders}
           bg="#046494"
           color="white"
-        /> */}
+        />
       </SimpleGrid>
     </Box>
   );
