@@ -35,7 +35,7 @@ function StatsCard(props) {
   );
 }
 
-export default function Hero({ orders }) {
+export default function Hero({ orders, country }) {
   const totalOrders = orders.length;
   const lastOrderIndex = totalOrders - 1;
   const lastOrder = orders[lastOrderIndex];
@@ -57,14 +57,10 @@ export default function Hero({ orders }) {
           bg="teal"
           color="white"
         />
+        <StatsCard title={"Last Order Date"} stat={"Order Date"} bg="white" />
         <StatsCard
-          title={"Last Order Date"}
-          stat={lastOrder["Order Date"]}
-          bg="white"
-        />
-        <StatsCard
-          title={"Total Customers"}
-          stat={totalOrders}
+          title={"Countries Present"}
+          stat={country.length}
           bg="#046494"
           color="white"
         />
