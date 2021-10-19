@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   chakra,
   Box,
@@ -35,11 +35,21 @@ function StatsCard(props) {
   );
 }
 
-export default function Hero({ orders, country }) {
+export default function Hero({ orders }) {
+  const [countries, setCountries] = useState([]);
+  const [state, setstate] = useState(initialState)
+  useEffect(() => {
+    orders.map((eachOrder) =>
+      setCountries((orders) => [...orders, eachOrder.Country])
+    );
+  });
   const totalOrders = orders.length;
-  const lastOrderIndex = totalOrders - 1;
-  const lastOrder = orders[lastOrderIndex];
 
+  var realCountries = [];
+  var realCountries = countries.filter(function (elem, pos) {
+    return countries.indexOf(elem) == pos;
+  });
+  console.log(realCountries);
   return (
     <Box maxW="7xl" mx={"auto"} pt={5} px={{ base: 2, sm: 12, md: 24 }}>
       <chakra.h1
@@ -59,8 +69,8 @@ export default function Hero({ orders, country }) {
         />
         <StatsCard title={"Last Order Date"} stat={"Order Date"} bg="white" />
         <StatsCard
-          title={"Countries Present"}
-          stat={country.length}
+          title={"Countries"}
+          stat={realCountries.length}
           bg="#046494"
           color="white"
         />

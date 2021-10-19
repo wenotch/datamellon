@@ -6,9 +6,9 @@ import Axios from "axios";
 function App() {
   const notify = () => toast.success("Successfully fetched Orders");
   const [orders, setorders] = useState([]);
-  const [countries, setCountries] = useState([]);
+
   useEffect(() => {
-    const fetcher = async () => {
+    const fetcher = () => {
       const options = {
         url: "https://g54qw205uk.execute-api.eu-west-1.amazonaws.com/DEV/stub",
         method: "POST",
@@ -22,30 +22,21 @@ function App() {
       Axios(options)
         .then((response) => {
           setorders(response.data);
-          notify();
         })
         .then((response) => {
-          response.data.map((eachOrder) =>
-            setCountries((orders) => [...orders, eachOrder.Country])
-          );
+          notify();
         })
         .catch((error) => {
-          toast.error("Something went wrong");
+          toast.error("Something went wrong" + error.message);
         });
     };
 
     fetcher();
   }, []);
 
-  // removes duplicate countries from the array of countries
-  var realCountries = [];
-  var realCountries = countries.filter(function (elem, pos) {
-    return countries.indexOf(elem) == pos;
-  });
-  console.log(realCountries);
   return (
     <div className="App">
-      <Hero orders={orders} country={realCountries} />
+      <Hero orders={orders} />
       <List orders={orders} />
       <Toaster />
     </div>
