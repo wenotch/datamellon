@@ -12,41 +12,13 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import Axios from "axios";
-import toast from "react-hot-toast";
 
-function List() {
-  const [orders, setorders] = useState([]);
+function List({ orders }) {
   const [isLoading, setisLoading] = useState(false);
   const [value, setValue] = useState("");
   const [currentPage, setcurrentPage] = useState(1);
   const [postsPerPage] = useState(100);
   const handleChange = (event) => setValue(event.target.value);
-  const notify = () => toast.success("Successfully fetched Orders");
-  useEffect(() => {
-    const fetcher = async () => {
-      const options = {
-        url: "https://g54qw205uk.execute-api.eu-west-1.amazonaws.com/DEV/stub",
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        data: { angular_test: "angular-developer" },
-      };
-
-      Axios(options)
-        .then((response) => {
-          setorders(response.data);
-          notify();
-        })
-        .catch((error) => {
-          toast.error("Something went wrong");
-        });
-    };
-
-    fetcher();
-  }, []);
 
   let dataSearch = orders.filter((item) => {
     return Object.keys(item).some((key) =>
@@ -66,7 +38,7 @@ function List() {
   const paginate = (pageNumber) => setcurrentPage(pageNumber);
   const mobiletoggler = { base: "none", md: "table-cell" };
   return (
-    <Box p="50px">
+    <Box p="50px" px={36}>
       <Stack direction="row" spacing={4} align="center" mb={4} justify="center">
         <InputGroup w="60" m="auto">
           <InputLeftElement pointerEvents="none" />
@@ -102,7 +74,7 @@ function List() {
             </Flex>
           ) : (
             currentPosts.map((order) => {
-              console.log(order);
+              {/* console.log(order); */}
               return (
                 <Tr key={order["Order ID"]}>
                   <Td>{order["Order ID"]}</Td>
