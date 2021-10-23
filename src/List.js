@@ -93,7 +93,7 @@ function List({ orders }) {
           )}
         </Tbody>
       </Table>
-      {dataSearch.length === 0 ? <Text>No Match Found</Text> : null}
+      {orders.length === 0 ? <Text>Loading data...</Text> : null}
       <Pagination
         postsPerpage={postsPerPage}
         totalPosts={dataSearch.length}

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
   chakra,
+  Flex,
   Box,
+  Button,
   useColorModeValue,
   SimpleGrid,
   Stat,
   StatLabel,
   StatNumber,
 } from "@chakra-ui/react";
-
+import Chart from "react-apexcharts";
 function StatsCard(props) {
   const { title, stat } = props;
   return (
@@ -35,6 +37,37 @@ function StatsCard(props) {
 }
 
 export default function Hero({ orders }) {
+  const series = [
+    {
+      name: "Temperature in Fahrenheit", //will be displayed on the y-axis
+      data: [43, 53, 50, 57],
+    },
+  ];
+  const options = {
+    chart: {
+      id: "simple-bar",
+    },
+    xaxis: {
+      categories: [1, 2, 3, 4], //will be displayed on the x-asis
+    },
+  };
+
+  const options2 = {
+    labels: ["Comedy", "Action", "Romance", "Drama", "SciFi"],
+  };
+  const series2 = [4, 5, 6, 1, 5];
+
+  const series3 = [
+    {
+      name: "Guests",
+      data: [19, 22, 20, 26],
+    },
+  ];
+  const options3 = {
+    xaxis: {
+      categories: ["2019-05-01", "2019-05-02", "2019-05-03", "2019-05-04"],
+    },
+  };
   const [countries, setCountries] = useState([]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -72,22 +105,50 @@ export default function Hero({ orders }) {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title={"Total Orders"}
-          stat={orders.length}
+          stat={
+            orders.length === 0 ? (
+              <Button isLoading color="white" bg="transparent"></Button>
+            ) : (
+              orders.length
+            )
+          }
           bg="teal"
           color="white"
         />
         <StatsCard
           title={"Total Products"}
-          stat={realProducts.length}
+          stat={
+            realProducts.length === 0 ? (
+              <Button isLoading color="black" bg="transparent"></Button>
+            ) : (
+              realProducts.length
+            )
+          }
           bg="white"
         />
         <StatsCard
           title={"Countries"}
-          stat={realCountries.length}
+          stat={
+            realCountries.length === 0 ? (
+              <Button isLoading color="white" bg="transparent"></Button>
+            ) : (
+              realCountries.length
+            )
+          }
           bg="#046494"
           color="white"
         />
       </SimpleGrid>
+
+      {realCountries.length === 0 ? (
+        <Button isLoading color="black" bg="transparent"></Button>
+      ) : (
+        <Flex justify="space-between" pt="20">
+          <Chart options={options} type="bar" series={series} width="100%" />
+          <Chart options={options2} type="pie" series={series2} width="380" />
+          <Chart type="line" series={series3} options={options3} />;
+        </Flex>
+      )}
     </Box>
   );
 }
